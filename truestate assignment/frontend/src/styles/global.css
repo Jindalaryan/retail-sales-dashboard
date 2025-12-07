@@ -1,0 +1,502 @@
+/* ========== GLOBAL RESET ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ========== BACKGROUND ========== */
+/* public/bg-dashboard.jpg add karo */
+body {
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(15, 23, 42, 0.95)),
+    url("/bg-dashboard.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #f5f5f5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== APP LAYOUT ========== */
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- HEADER ---------- */
+
+.app-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 12px;
+
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.9),
+    rgba(30, 64, 175, 0.85)
+  );
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75);
+}
+
+.app-header::before {
+  content: "";
+  width: 6px;
+  height: 28px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #facc15, #f97316);
+}
+
+.app-header h1 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- MAIN GRID ---------- */
+
+.layout {
+  flex: 1;
+  width: 100%;
+  max-width: 1320px;
+  margin: 20px auto 24px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 18px;
+}
+
+/* ========== GLASS CARD BASE ========== */
+
+.card-base {
+  background: radial-gradient(
+      circle at top left,
+      rgba(148, 163, 184, 0.32),
+      rgba(15, 23, 42, 0.95)
+    );
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(18px);
+  overflow: hidden; /* important: inputs, content don't spill out */
+}
+
+/* FILTER PANEL & CONTENT */
+
+.filter-panel {
+  composes: card-base;
+}
+
+/* composes not supported in plain CSS -> manual: */
+.filter-panel,
+.content {
+  background: radial-gradient(
+      circle at top left,
+      rgba(148, 163, 184, 0.32),
+      rgba(15, 23, 42, 0.95)
+    );
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(18px);
+  overflow: hidden;
+}
+
+.filter-panel {
+  padding: 18px 16px 20px;
+}
+
+.content {
+  padding: 18px 18px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== FILTER PANEL STYLES ========== */
+
+.filter-panel h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #f9fafb;
+}
+
+.filter-group {
+  margin-bottom: 14px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #cbd5f5;
+}
+
+/* chips */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.7);
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: all 0.16s ease-out;
+}
+
+.chip:hover {
+  border-color: #a5b4fc;
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.7);
+}
+
+.chip.active {
+  background: linear-gradient(135deg, #22c55e, #38bdf8);
+  border-color: transparent;
+  color: #020617;
+  box-shadow: 0 8px 22px rgba(56, 189, 248, 0.9);
+}
+
+/* AGE + DATE RANGE (FIXED) */
+
+/* DATE RANGE SECTION */
+.filter-section h3 {
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+/* Date Range Wrapper */
+.date-range {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Separator */
+.date-separator {
+  color: #cbd5e1;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Date Input Beautiful Style */
+.date-range input[type="date"] {
+  flex: 1;
+  width: 100%;
+  background: rgba(30, 41, 59, 0.65); /* dark glass */
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  backdrop-filter: blur(6px);
+  transition: 0.2s ease;
+}
+
+/* Fix the calendar icon alignment */
+.date-range input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.85;
+  margin-right: 6px;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+}
+
+/* Placeholder Color */
+.date-range input[type="date"]::placeholder {
+  color: #94a3b8;
+}
+
+/* Focus Effect */
+.date-range input[type="date"]:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.5);
+}
+/* ===== AGE RANGE – side-by-side fixed ===== */
+
+.age-range {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.range-separator {
+  color: #cbd5e1;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Age inputs */
+.age-range input[type="number"] {
+  flex: 1;
+  width: 100%;
+  padding: 10px 14px;
+
+  background: rgba(30, 41, 59, 0.65);        /* same as date inputs */
+  backdrop-filter: blur(6px);
+
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  border-radius: 12px;
+
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  height: 42px;
+
+  outline: none;
+  transition: 0.2s ease;
+}
+
+/* Placeholder color */
+.age-range input[type="number"]::placeholder {
+  color: #94a3b8;
+}
+
+/* Focus state */
+.age-range input[type="number"]:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.5);
+}
+
+
+.age-range input,
+.date-range input {
+  flex: 1;
+  min-width: 0;          /* prevents overflow */
+  max-width: 100%;
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.75);
+  background: rgba(15, 23, 42, 0.85);
+  color: #e5e7eb;
+  font-size: 0.78rem;
+  outline: none;
+  transition: all 0.16s ease-out;
+}
+
+.age-range input::placeholder,
+.date-range input::placeholder {
+  color: #6b7280;
+}
+
+.age-range input:focus,
+.date-range input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.8);
+}
+
+/* ========== TOP BAR (SEARCH + SORT) ========== */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* search */
+
+.search-bar {
+  flex: 1;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.85);
+  color: #f9fafb;
+  font-size: 0.85rem;
+  outline: none;
+  transition: all 0.18s ease-out;
+}
+
+.search-bar input::placeholder {
+  color: #6b7280;
+}
+
+.search-bar input:focus {
+  border-color: #a855f7;
+  box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.8);
+}
+
+/* sort dropdown */
+
+.sort-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #cbd5f5;
+}
+
+.sort-dropdown select {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.75);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  font-size: 0.78rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.sort-dropdown select:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.8);
+}
+
+/* ========== TABLE ========== */
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: #e5e7eb;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.sales-table thead {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.98),
+    rgba(30, 64, 175, 0.95)
+  );
+}
+
+.sales-table th,
+.sales-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.95);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.sales-table th {
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.sales-table tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.92);
+}
+
+.sales-table tbody tr:nth-child(odd) {
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.sales-table tbody tr:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(34, 197, 94, 0.25),
+    rgba(56, 189, 248, 0.25)
+  );
+  transform: translateY(-1px);
+  transition: all 0.14s ease-out;
+}
+
+/* ========== PAGINATION ========== */
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: #cbd5f5;
+}
+
+.pagination button {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.85);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.16s ease-out;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #22c55e, #38bdf8);
+  border-color: transparent;
+  color: #020617;
+  box-shadow: 0 10px 24px rgba(56, 189, 248, 0.9);
+}
+
+.pagination button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ========== MISC ========== */
+
+.loading,
+.no-results {
+  padding: 18px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .filter-panel {
+    order: 2;
+  }
+  .content {
+    order: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .layout {
+    padding: 0 12px;
+  }
+  .top-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .sort-dropdown {
+    justify-content: flex-end;
+  }
+}
